@@ -1,48 +1,69 @@
 import React from 'react';
-import { Code } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Rocket, Star } from 'lucide-react';
 
 const projects = [
   {
-    title: 'Portfolio Website',
-    tech: ['React', 'TypeScript', 'Three.js', 'Tailwind CSS'],
-    description: 'Modern, performance‑focused portfolio with 3D graphics, responsive design, and interactive visuals.',
-    link: '#',
+    title: 'Nebula Navigator',
+    desc: 'A real-time 3D space visualizer blending WebGL and physics for mesmerizing starfield journeys.',
+    tags: ['Three.js', 'WebGL', 'FastAPI'],
+    highlight: true,
+  },
+  {
+    title: 'Hologram UI Kit',
+    desc: 'A neon, glassy component kit with focus on micro-interactions and performance.',
+    tags: ['React', 'Tailwind', 'Framer Motion'],
+  },
+  {
+    title: 'Cosmic Commerce',
+    desc: 'Headless storefront with immersive product previews and AR try-ons.',
+    tags: ['Next.js', 'Stripe', 'MongoDB'],
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative w-full bg-neutral-950 text-white">
-      <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:py-16 md:py-20">
-        <div className="mb-8 flex items-center gap-2 text-teal-300">
-          <Code className="h-5 w-5" />
-          <h2 className="text-xl sm:text-2xl font-semibold">Projects</h2>
+    <section id="projects" className="relative mx-auto max-w-7xl px-6 py-24">
+      <div className="mb-12 flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Featured Projects</h2>
+          <p className="mt-2 text-white/60">Select work engineered for speed, beauty, and impact.</p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2">
-          {projects.map((p, idx) => (
-            <a
-              key={idx}
-              href={p.link}
-              className="group rounded-lg border border-white/10 bg-white/[0.03] p-5 sm:p-6 transition-colors hover:bg-white/[0.06]"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-lg sm:text-xl font-medium">{p.title}</h3>
-                <span className="text-xs text-white/60">Featured</span>
-              </div>
-              <p className="mt-2 text-sm text-white/75">{p.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {p.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-md border border-white/10 bg-white/[0.06] px-2.5 py-1 text-xs text-white/80"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </a>
-          ))}
+        <div className="hidden sm:block rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 backdrop-blur-md">
+          <span className="inline-flex items-center gap-2"><Star className="h-4 w-4 text-amber-300" /> Curated</span>
         </div>
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p, idx) => (
+          <motion.article
+            key={p.title}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: idx * 0.06 }}
+            className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition ${
+              p.highlight ? 'ring-1 ring-fuchsia-400/20' : ''
+            }`}
+          >
+            <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(168,85,247,0.12),transparent_60%)]" />
+            </div>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70">
+              <Rocket className="h-4 w-4 text-fuchsia-300" />
+              {p.highlight ? 'Flagship' : 'Project'}
+            </div>
+            <h3 className="text-xl font-semibold text-white">{p.title}</h3>
+            <p className="mt-2 text-sm text-white/70">{p.desc}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {p.tags.map((t) => (
+                <span key={t} className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-white/70">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.article>
+        ))}
       </div>
     </section>
   );

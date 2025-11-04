@@ -1,48 +1,48 @@
 import React from 'react';
 import Hero3D from './components/Hero3D';
-import Experience from './components/Experience';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
+import Experience from './components/Experience';
 import Contact from './components/Contact';
+import { Rocket } from 'lucide-react';
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-neutral-950 text-white antialiased">
+    <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-neutral-950/70 backdrop-blur">
-        <div className="mx-auto w-full max-w-6xl px-4 py-3 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-teal-500 text-black font-semibold">A</span>
-            <span className="text-sm font-medium text-white/85">Azrael</span>
-          </a>
-          <nav className="hidden sm:flex items-center gap-5 text-sm text-white/75">
-            <a href="#projects" className="hover:text-white">Projects</a>
-            <a href="#experience" className="hover:text-white">Experience</a>
-            <a href="#skills" className="hover:text-white">Skills</a>
-            <a href="#contact" className="hover:text-white">Contact</a>
+      <header className="fixed inset-x-0 top-0 z-20">
+        <div className="mx-auto w-full max-w-7xl px-6 py-4">
+          <nav className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/40 px-4 py-2 backdrop-blur-xl">
+            <a href="#home" className="inline-flex items-center gap-2 text-white">
+              <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-fuchsia-500 to-cyan-500">
+                <Rocket className="h-4 w-4" />
+              </span>
+              <span className="hidden text-sm font-semibold sm:inline">Cosmic Portfolio</span>
+            </a>
+            <div className="flex items-center gap-2 sm:gap-4">
+              <a href="#projects" className="rounded-lg px-3 py-2 text-sm text-white/80 hover:text-white">Projects</a>
+              <a href="#experience" className="rounded-lg px-3 py-2 text-sm text-white/80 hover:text-white">Experience</a>
+              <a href="#contact" className="rounded-lg px-3 py-2 text-sm text-white/80 hover:text-white">Contact</a>
+            </div>
           </nav>
         </div>
       </header>
 
+      {/* Sections */}
       <main>
         <Hero3D />
         <Projects />
         <Experience />
-        <Skills />
         <Contact />
       </main>
 
-      <footer className="border-t border-white/10 bg-neutral-950">
-        <div className="mx-auto w-full max-w-6xl px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
-          <span>© {new Date().getFullYear()} Azrael. Built with React, Vite, and Tailwind.</span>
-          <div className="flex items-center gap-4">
-            <a href="#projects" className="hover:text-white">Projects</a>
-            <a href="#contact" className="hover:text-white">Contact</a>
-          </div>
+      {/* Footer */}
+      <footer className="relative border-t border-white/10 bg-black/40">
+        <div className="mx-auto max-w-7xl px-6 py-10 text-center text-sm text-white/60">
+          <p>
+            Built with React + Tailwind. Visuals powered by Spline. Crafted for a futuristic, cosmic aesthetic.
+          </p>
         </div>
       </footer>
     </div>
   );
 }
-
-export default App;

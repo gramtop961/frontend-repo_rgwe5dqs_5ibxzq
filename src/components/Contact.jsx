@@ -1,95 +1,93 @@
 import React, { useMemo, useState } from 'react';
-import { Mail, Send, MessageSquare, User } from 'lucide-react';
+import { Mail, Send, Github, Linkedin } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const mailtoHref = useMemo(() => {
-    const subject = encodeURIComponent(`Portfolio contact from ${name || 'Guest'}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    return `mailto:azrael@example.com?subject=${subject}&body=${body}`;
+  const mailto = useMemo(() => {
+    const subject = encodeURIComponent(`Portfolio inquiry from ${name || 'Visitor'}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name}${email ? ` • ${email}` : ''}`);
+    return `mailto:you@example.com?subject=${subject}&body=${body}`;
   }, [name, email, message]);
 
   return (
-    <section id="contact" className="relative w-full bg-neutral-950 text-white">
-      <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:py-16 md:py-20">
-        <div className="mb-8 flex items-center gap-2 text-teal-300">
-          <Mail className="h-5 w-5" />
-          <h2 className="text-xl sm:text-2xl font-semibold">Contact</h2>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-            <h3 className="text-lg font-medium text-white/90">Let’s build something great</h3>
-            <p className="mt-2 text-sm text-white/70">
-              I’m open to freelance work, consulting, and full‑time roles. Share a few details and I’ll get back to you.
-            </p>
-            <div className="mt-6 space-y-4">
-              <div className="flex items-center gap-3 text-sm">
-                <Mail className="h-4 w-4 text-teal-300" />
-                <a href="mailto:azrael@example.com" className="hover:underline">azrael@example.com</a>
-              </div>
-            </div>
-          </div>
-
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              window.location.href = mailtoHref;
-            }}
-            className="rounded-xl border border-white/10 bg-white/[0.03] p-6"
-          >
-            <div className="grid gap-4">
-              <label className="grid gap-2">
-                <span className="text-xs uppercase tracking-wide text-white/60">Name</span>
-                <div className="relative">
-                  <User className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Your name"
-                    className="w-full rounded-md border border-white/10 bg-neutral-900 pl-10 pr-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-teal-500/60"
-                  />
-                </div>
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs uppercase tracking-wide text-white/60">Email</span>
-                <div className="relative">
-                  <Mail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
-                    className="w-full rounded-md border border-white/10 bg-neutral-900 pl-10 pr-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-teal-500/60"
-                  />
-                </div>
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs uppercase tracking-wide text-white/60">Message</span>
-                <div className="relative">
-                  <MessageSquare className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-white/40" />
-                  <textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="What would you like to build?"
-                    rows={5}
-                    className="w-full rounded-md border border-white/10 bg-neutral-900 pl-10 pr-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-teal-500/60"
-                  />
-                </div>
-              </label>
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-teal-500 px-4 py-2 text-sm font-medium text-black hover:bg-teal-400 transition-colors"
-              >
-                <Send className="h-4 w-4" /> Send
-              </button>
-            </div>
-          </form>
-        </div>
+    <section id="contact" className="relative mx-auto max-w-3xl px-6 py-24">
+      <div className="mx-auto mb-10 text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Get in touch</h2>
+        <p className="mt-2 text-white/60">Have an idea or opportunity? Let’s make something unforgettable.</p>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6 }}
+        className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+      >
+        <div className="mb-6 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="mb-2 block text-sm text-white/70">Name</label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder-white/40 outline-none ring-0 transition focus:border-fuchsia-400/40"
+              placeholder="Ada Lovelace"
+            />
+          </div>
+          <div>
+            <label className="mb-2 block text-sm text-white/70">Email</label>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder-white/40 outline-none ring-0 transition focus:border-cyan-400/40"
+              placeholder="you@domain.com"
+            />
+          </div>
+        </div>
+        <div>
+          <label className="mb-2 block text-sm text-white/70">Message</label>
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={5}
+            className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder-white/40 outline-none ring-0 transition focus:border-fuchsia-400/40"
+            placeholder="Tell me about your vision…"
+          />
+        </div>
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-3 text-white/70">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 transition hover:bg-white/10"
+            >
+              <Github className="h-4 w-4" /> GitHub
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 transition hover:bg-white/10"
+            >
+              <Linkedin className="h-4 w-4" /> LinkedIn
+            </a>
+          </div>
+          <a
+            href={mailto}
+            className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-5 py-3 font-medium text-white shadow-lg shadow-fuchsia-500/20 transition hover:scale-[1.02] hover:shadow-cyan-500/20"
+          >
+            <Send className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+            Send Message
+          </a>
+        </div>
+      </motion.div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-10 -z-0 mx-auto h-40 max-w-3xl blur-3xl bg-gradient-to-r from-fuchsia-500/20 via-cyan-500/20 to-violet-500/20" />
     </section>
   );
 }
