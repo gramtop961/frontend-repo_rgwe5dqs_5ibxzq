@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 import Hero3D from './components/Hero3D';
-import Projects from './components/Projects';
-import Experience from './components/Experience';
-import Contact from './components/Contact';
+
+const Projects = lazy(() => import('./components/Projects'));
+const Experience = lazy(() => import('./components/Experience'));
+const Contact = lazy(() => import('./components/Contact'));
 
 export default function App() {
   const [theme, setTheme] = useState('dark');
@@ -48,14 +49,29 @@ export default function App() {
       {/* Sections */}
       <main className="relative">
         <Hero3D />
-        <Projects />
-        <Experience />
-        <Contact />
+        <Suspense fallback={<SectionLoader label="Loading projects" />}> 
+          <Projects />
+        </Suspense>
+        <Suspense fallback={<SectionLoader label="Loading experience" />}> 
+          <Experience />
+        </Suspense>
+        <Suspense fallback={<SectionLoader label="Loading contact" />}> 
+          <Contact />
+        </Suspense>
       </main>
 
       <footer className="border-t border-white/10 bg-black/40 py-6 text-center text-sm text-indigo-200/70">
         © {new Date().getFullYear()} Azrael. Crafted with React, Tailwind, and a dash of 3D.
       </footer>
+    </div>
+  );
+}
+
+function SectionLoader({ label }) {
+  return (
+    <div className="mx-auto max-w-7xl px-6 py-16">
+      <div className="h-10 w-10 animate-spin rounded-full border-2 border-indigo-400 border-t-transparent" />
+      <p className="mt-3 text-sm text-indigo-200/80">{label}…</p>
     </div>
   );
 }

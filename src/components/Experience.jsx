@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap } from 'lucide-react';
+import { Briefcase, GraduationCap, Star } from 'lucide-react';
 
 const experiences = [
   {
@@ -29,6 +29,13 @@ const education = [
     period: 'Expected 2026',
     points: ['IGCSE background', 'Systems + web focus'],
   },
+];
+
+const skills = [
+  { title: 'Languages', items: ['Java', 'JavaScript', 'TypeScript', 'Python', 'C'] },
+  { title: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS'] },
+  { title: 'Backend & DB', items: ['Node.js', 'Django', 'PostgreSQL', 'Firebase'] },
+  { title: 'Design & 3D', items: ['Figma', 'Three.js'] },
 ];
 
 export default function Experience() {
@@ -84,6 +91,28 @@ export default function Experience() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Skills grid */}
+      <div className="mt-14">
+        <div className="mb-6 inline-flex items-center gap-2 text-indigo-200">
+          <Star className="h-4 w-4" />
+          <h3 className="text-xl font-semibold text-white">Skills</h3>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {skills.map((group) => (
+            <div key={group.title} className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+              <h4 className="text-base font-medium text-white/90">{group.title}</h4>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span key={item} className="rounded-md border border-white/10 bg-white/10 px-2.5 py-1 text-xs text-white/80">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

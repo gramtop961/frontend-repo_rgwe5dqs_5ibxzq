@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, Rss } from 'lucide-react';
 
 const projects = [
   {
@@ -40,6 +40,27 @@ const projects = [
     repo: '#',
     contribution: 'Delivered calendar views and dynamic address forms.',
     impact: 'Improved scheduling efficiency by 35%.',
+  },
+];
+
+const posts = [
+  {
+    title: 'Designing frictionless real‑time UX',
+    summary: 'Patterns for presence, cursor sync, and conflict resolution that feel magical.',
+    date: 'Oct 2025',
+    href: '#',
+  },
+  {
+    title: 'Taming performance budgets in modern React',
+    summary: 'Practical steps to keep bundles lean while shipping rich interactions.',
+    date: 'Sep 2025',
+    href: '#',
+  },
+  {
+    title: 'A pragmatic intro to 3D on the web',
+    summary: 'Where 3D shines, where it doesn’t, and how to integrate it thoughtfully.',
+    date: 'Aug 2025',
+    href: '#',
   },
 ];
 
@@ -135,6 +156,23 @@ export default function Projects() {
         {projects.map((p) => (
           <ProjectCard key={p.title} project={p} />
         ))}
+      </div>
+
+      {/* Blog feed */}
+      <div className="mt-16">
+        <div className="mb-6 inline-flex items-center gap-2 text-indigo-200">
+          <Rss className="h-4 w-4" />
+          <h3 className="text-xl font-semibold text-white">Latest Posts</h3>
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <a key={post.title} href={post.href} className="block overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition hover:bg-white/10">
+              <p className="text-xs text-indigo-300/80">{post.date}</p>
+              <h4 className="mt-1 text-base font-semibold text-white">{post.title}</h4>
+              <p className="mt-2 text-sm text-indigo-100/90">{post.summary}</p>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );

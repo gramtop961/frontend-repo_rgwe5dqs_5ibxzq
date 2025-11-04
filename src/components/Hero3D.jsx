@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Spline from '@splinetool/react-spline';
-import { Download, Mail, Rocket, Github, Linkedin } from 'lucide-react';
+import { Download, Mail, Rocket, Github, Linkedin, Info } from 'lucide-react';
 
 export default function Hero3D({ onScrollTo }) {
   const [mounted, setMounted] = useState(false);
@@ -34,12 +34,26 @@ export default function Hero3D({ onScrollTo }) {
     y: useTransform(glowY, (v) => v - 150),
   };
 
+  // Magnetic button effect
+  const [magnet, setMagnet] = useState({ x: 0, y: 0 });
+  const magnetRef = useRef(null);
+  const onMagnetMove = (e) => {
+    const el = magnetRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - (rect.left + rect.width / 2);
+    const y = e.clientY - (rect.top + rect.height / 2);
+    const strength = 0.12;
+    setMagnet({ x: x * strength, y: y * strength });
+  };
+  const onMagnetLeave = () => setMagnet({ x: 0, y: 0 });
+
   return (
     <section
       id="home"
       ref={ref}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[90vh] w-full overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white dark:from-black dark:via-slate-900 dark:to-slate-950"
+      className="relative min-h-[92vh] w-full overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white dark:from-black dark:via-slate-900 dark:to-slate-950"
     >
       <div className="absolute inset-0">
         <Spline
@@ -58,6 +72,12 @@ export default function Hero3D({ onScrollTo }) {
             'radial-gradient(circle at center, rgba(99,102,241,0.35), rgba(14,165,233,0.25) 50%, transparent 70%)',
         }}
       />
+
+      {/* Layered parallax mists */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-20 top-10 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl" />
+      </div>
 
       {/* Overlay gradients that do not block interaction */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
@@ -82,29 +102,37 @@ export default function Hero3D({ onScrollTo }) {
             React, Next.js, Django — shipping delightful, accessible interfaces backed by robust systems.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
+          <div
+            ref={magnetRef}
+            onMouseMove={onMagnetMove}
+            onMouseLeave={onMagnetLeave}
+            className="mt-8 flex flex-wrap items-center gap-3"
+          >
+            <motion.a
               href="#projects"
+              style={{ x: magnet.x, y: magnet.y }}
               className="group relative inline-flex items-center gap-2 rounded-full bg-indigo-500 px-5 py-3 text-sm font-medium text-white shadow-lg shadow-indigo-500/30 transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             >
               <span>View Projects</span>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#contact"
+              style={{ x: magnet.x, y: magnet.y }}
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/30"
             >
               <Mail className="h-4 w-4" />
               <span>Get in Touch</span>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="/Azrael-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ x: magnet.x, y: magnet.y }}
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/30"
             >
               <Download className="h-4 w-4" />
               <span>Download Resume</span>
-            </a>
+            </motion.a>
           </div>
 
           <div className="mt-6 flex items-center gap-4 text-sm text-indigo-100/80">
@@ -115,6 +143,23 @@ export default function Hero3D({ onScrollTo }) {
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>
           </div>
+        </motion.div>
+
+        {/* About Me mini-section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="mt-14 max-w-4xl rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+        >
+          <div className="mb-2 inline-flex items-center gap-2 text-indigo-200">
+            <Info className="h-4 w-4" />
+            <span className="text-sm font-medium">About Me</span>
+          </div>
+          <p className="text-indigo-100/90 text-sm md:text-base">
+            I’m a builder who loves turning complex problems into elegant, fast experiences. My focus areas are design systems, real‑time UX, and scalable APIs. When not coding, I explore 3D, sound design, and motion.
+          </p>
         </motion.div>
       </div>
     </section>
