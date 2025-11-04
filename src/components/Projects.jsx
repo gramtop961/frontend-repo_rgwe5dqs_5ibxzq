@@ -42,12 +42,14 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: idx * 0.06 }}
-            className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition ${
+            whileHover={{ rotateX: 2, rotateY: -2, translateZ: 12 }}
+            className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition will-change-transform ${
               p.highlight ? 'ring-1 ring-fuchsia-400/20' : ''
             }`}
+            style={{ transformStyle: 'preserve-3d' }}
           >
-            <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(168,85,247,0.12),transparent_60%)]" />
+            <div className="absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[conic-gradient(from_180deg_at_50%_50%,rgba(168,85,247,0.15),rgba(34,211,238,0.12),transparent_40%)]" />
             </div>
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70">
               <Rocket className="h-4 w-4 text-fuchsia-300" />

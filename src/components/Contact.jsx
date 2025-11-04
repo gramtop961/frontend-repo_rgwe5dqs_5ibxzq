@@ -25,8 +25,11 @@ export default function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6 }}
-        className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+        className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
       >
+        <div className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 hover:opacity-100">
+          <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_20%_0%,rgba(168,85,247,0.12),transparent_60%)]" />
+        </div>
         <div className="mb-6 grid gap-4 sm:grid-cols-2">
           <div>
             <label className="mb-2 block text-sm text-white/70">Name</label>
@@ -64,7 +67,7 @@ export default function Contact() {
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 transition hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 transition hover:scale-[1.03] hover:bg-white/10"
             >
               <Github className="h-4 w-4" /> GitHub
             </a>
@@ -72,22 +75,23 @@ export default function Contact() {
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 transition hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 transition hover:scale-[1.03] hover:bg-white/10"
             >
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>
           </div>
           <a
             href={mailto}
-            className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-5 py-3 font-medium text-white shadow-lg shadow-fuchsia-500/20 transition hover:scale-[1.02] hover:shadow-cyan-500/20"
+            className="group relative inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-5 py-3 font-medium text-white shadow-lg shadow-fuchsia-500/20 transition [transform:perspective(800px)_translateZ(0)] hover:scale-[1.02] hover:shadow-cyan-500/20 hover:[transform:perspective(800px)_translateZ(16px)]"
           >
             <Send className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
             Send Message
+            <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/20" />
           </a>
         </div>
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-10 -z-0 mx-auto h-40 max-w-3xl blur-3xl bg-gradient-to-r from-fuchsia-500/20 via-cyan-500/20 to-violet-500/20" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-10 -z-0 mx-auto h-40 max-w-3xl bg-gradient-to-r from-fuchsia-500/20 via-cyan-500/20 to-violet-500/20 blur-3xl" />
     </section>
   );
 }

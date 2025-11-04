@@ -41,10 +41,13 @@ export default function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="relative rounded-2xl border border-white/10 bg-white/5 p-6 pl-16 backdrop-blur-xl"
+              className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 pl-16 backdrop-blur-xl"
             >
               <div className="absolute left-0 top-6 ml-2 grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-black/40 text-fuchsia-200 shadow-lg shadow-fuchsia-500/10 sm:ml-4">
                 <Briefcase className="h-5 w-5" />
+              </div>
+              <div className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <div className="absolute inset-0 bg-[radial-gradient(50%_60%_at_30%_0%,rgba(168,85,247,0.15),transparent_60%)]" />
               </div>
               <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
                 <h3 className="text-lg font-semibold text-white">{r.title}</h3>
