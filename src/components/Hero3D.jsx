@@ -2,16 +2,16 @@ import React from 'react';
 import Spline from '@splinetool/react-spline';
 import { Mail, Github, Linkedin, Rocket } from 'lucide-react';
 
+// Swapped to a different Spline scene for a fresh visual feel
+const SCENE_URL = 'https://prod.spline.design/4A4oYwP2t9kD0n86/scene.splinecode';
+
 export default function Hero3D() {
   return (
-    <section className="relative w-full bg-black text-white">
+    <section className="relative w-full bg-neutral-950 text-white">
       <div className="relative h-[72vh] sm:h-[78vh] md:h-[82vh] lg:h-[88vh] w-full">
-        <Spline
-          scene="https://prod.spline.design/VJLoxp84lCdVfdZu/scene.splinecode"
-          style={{ width: '100%', height: '100%' }}
-        />
+        <Spline scene={SCENE_URL} style={{ width: '100%', height: '100%' }} />
         {/* Soft gradient for readability without blocking interactions */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/70" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-neutral-950/10 via-neutral-950/30 to-neutral-950" />
       </div>
 
       {/* Content overlay */}
@@ -26,8 +26,7 @@ export default function Hero3D() {
               Azrael — crafting fast, modern web experiences
             </h1>
             <p className="mt-3 text-white/80 max-w-xl text-sm sm:text-base">
-              I design and build polished products end‑to‑end: typed component APIs, accessible UX, and
-              scalable backends. Interactive visuals, performance‑first mindset.
+              I design and build polished products end‑to‑end: typed component APIs, accessible UX, and scalable backends.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <a
